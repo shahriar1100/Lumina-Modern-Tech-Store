@@ -47,7 +47,7 @@
             </div>
         </section>
 
-        
+
         <!-- Product Section -->
         <section id="products" class="products container">
             <div class="section-header">
@@ -58,6 +58,46 @@
                 <!-- Injected via JS -->
             </div>
         </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact container">
+            <div class="contact-wrapper reveal">
+                <div class="contact-info">
+                    <h2>Let's Talk.</h2>
+                    <p>Have a question about our boutique collection? Reach out.</p>
+                </div>
+                <form id="contact-form" class="premium-form">
+                    <div class="input-group">
+                        <input type="text" id="name" placeholder="Name" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                    <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn-submit">Send Inquiry</button>
+                </form>
+            </div>
+        </section>
+  <!-- Side Cart (Slide-out) -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-inner">
+            <div class="cart-header">
+                <h3>Bag</h3>
+                <button id="close-cart">Close</button>
+            </div>
+            <div id="cart-items" class="cart-body">
+                <!-- Cart items -->
+            </div>
+            <div class="cart-footer">
+                <div class="total-row">
+                    <span>Total</span>
+                    <span id="cart-total-price">$0</span>
+                </div>
+                <button class="btn-checkout">Checkout Now</button>
+            </div>
+        </div>
+    </div>
 
 
     </main>
