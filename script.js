@@ -81,3 +81,62 @@ function toggleCart(isOpen) {
         overlay.classList.remove('active');
     }
 }
+
+// 4. Modal Logic
+window.openModal = (id) => {
+    const product = products.find(p => p.id === id);
+    const modal = document.getElementById('product-modal');
+    const body = document.getElementById('modal-body');
+    
+    body.innerHTML = `
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2rem; align-items:center;">
+            <img src="${product.image}" style="width:100%; border-radius:15px;">
+            <div>
+                <h2 style="font-size:2rem; margin-bottom:1rem;">${product.name}</h2>
+                <p style="color:#888; margin-bottom:1.5rem;">${product.desc}</p>
+                <p style="font-size:1.5rem; font-weight:700;">$${product.price}</p>
+                <button class="btn-premium" style="margin-top:2rem; width:100%;" onclick="addToCart(${product.id})">Add to Bag</button>
+            </div>
+        </div>
+    `;
+    modal.style.display = 'flex';
+};
+
+// 5. Scroll & Reveal Logic
+function handleScroll() {
+    // Sticky Header
+    const header = document.getElementById('header');
+    window.scrollY > 50 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+
+    // Reveal elements on scroll
+    const reveals = document.querySelectorAll('.reveal, .reveal-delay, .reveal-delay-2');
+    reveals.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            el.classList.add('active');
+        }
+    });
+}
+
+function setupEventListeners() {
+    window.addEventListener('scroll', handleScroll);
+    document.getElementById('cart-toggle').onclick = () => toggleCart(true);
+    document.getElementById('close-cart').onclick = () => toggleCart(false);
+    document.getElementById('cart-overlay').onclick = () => toggleCart(false);
+    
+    document.querySelector('.close-modal').onclick = () => {
+        document.getElementById('product-modal').style.display = 'none';
+    };
+
+    // Form Submission
+    document.getElementById('contact-form').onsubmit = (e) => {
+        e.preventDefault();
+        const status = document.getElementById('form-status');
+        status.innerText = "Processing Inquiry...";
+        setTimeout(() => {
+            status.innerText = "Thank you. Our team will contact you shortly.";
+            status.style.color = "#00ff00";
+            e.target.reset();
+        }, 1500);
+    };
+}
