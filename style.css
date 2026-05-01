@@ -1,0 +1,62 @@
+:root {
+    --bg: #0a0a0a;
+    --surface: #121212;
+    --accent: #ffffff;
+    --text-main: #ffffff;
+    --text-dim: #a1a1a1;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container { max-width: 1300px; margin: 0 auto; padding: 0 4rem; }
+
+/* Header - Modern Glassmorphism */
+.header {
+    position: fixed;
+    top: 0; width: 100%; height: 80px;
+    z-index: 1000;
+    display: flex; align-items: center;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-bottom: 1px solid transparent;
+}
+
+.header.scrolled {
+    height: 65px;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+.logo { 
+    font-weight: 700; font-size: 1.4rem; letter-spacing: 2px; 
+    text-decoration: none; color: #fff;
+}
+.logo span { color: var(--text-dim); }
+
+.nav-links { display: flex; list-style: none; gap: 3rem; }
+.nav-item { 
+    text-decoration: none; color: var(--text-dim); 
+    font-size: 0.85rem; font-weight: 500; text-transform: uppercase;
+    transition: color 0.3s;
+}
+.nav-item:hover { color: #fff; }
+
+.cart-trigger {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    color: #fff; padding: 8px 18px;
+    border-radius: 100px; cursor: pointer;
+}
