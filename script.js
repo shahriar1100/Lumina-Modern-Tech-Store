@@ -22,3 +22,62 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     handleScroll();
 });
+
+// 2. Render Products to UI
+function renderProducts() {
+    const list = document.getElementById('product-list');
+    list.innerHTML = products.map(p => `
+        <div class="product-card reveal">
+            <img src="${p.image}" alt="${p.name}" onclick="openModal(${p.id})">
+            <h3>${p.name}</h3>
+            <p class="price">$${p.price}</p>
+            <button class="btn-add" onclick="addToCart(${p.id})">Add to Bag</button>
+        </div>
+    `).join('');
+}
+
+// 3. Cart Logic
+window.addToCart = (id) => {
+    const item = products.find(p => p.id === id);
+    cart.push(item);
+    updateCartUI();
+    toggleCart(true);
+};
+
+function updateCartUI() {
+    const cartCount = document.getElementById('cart-count');
+    const cartItems = document.getElementById('cart-items');
+    const totalPrice = document.getElementById('cart-total-price');
+
+    cartCount.innerText = cart.length;
+    
+    cartItems.innerHTML = cart.map((item, index) => `
+        <div class="cart-item" style="display:flex; justify-content:space-between; margin-bottom:1.5rem; align-items:center;">
+            <div>
+                <p style="font-weight:500;">${item.name}</p>
+                <p style="color:#888; font-size:0.8rem;">$${item.price}</p>
+            </div>
+            <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;">Remove</button>
+        </div>
+    `).join('');
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    totalPrice.innerText = `$${total}`;
+}
+
+window.removeFromCart = (index) => {
+    cart.splice(index, 1);
+    updateCartUI();
+};
+
+function toggleCart(isOpen) {
+    const sidebar = document.getElementById('cart-sidebar');
+    const overlay = document.getElementById('cart-overlay');
+    if (isOpen) {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+    } else {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+}
